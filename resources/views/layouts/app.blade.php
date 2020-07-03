@@ -18,6 +18,10 @@
                 {{ trans('tasks.app.title') }}
             </a>
         </div>
+        <div class="navbar-header language">
+            <a class="navbar-brand" href="{{ route('user.change-language', ['en']) }}">{{ trans('tasks.english') }}</a>
+            <a class="navbar-brand" href="{{ route('user.change-language', ['vi']) }}">{{ trans('tasks.vietnam') }}</a>
+        </div>
     </div>
 </nav>
 @yield('content')

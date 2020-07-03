@@ -16,4 +16,9 @@ return [
     'app' => [
         'title' => 'Danh sách tác vụ',
     ],
+    'nameRequired' => 'Tên tác vụ không được để trống',
+    'added' => 'Thêm tác vụ thành công',
+    'deleted' => 'Xoá tác vụ thành công',
+    'english' => 'English',
+    'vietnam' => 'Vietnam',
 ];

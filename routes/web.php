@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('change-language/{language}', 'TaskController@changeLanguage')
+    ->name('user.change-language');
 Route::resource('tasks', 'TaskController')
-    ->only('index', 'store', 'destroy');
+    ->only('index', 'store', 'destroy')->middleware('locale');

@@ -16,4 +16,9 @@ return [
     'app' => [
         'title' => 'Task List',
     ],
+    'nameRequired' => 'The name of task must be typed',
+    'added' => 'Created Successful',
+    'deleted' => 'Deleted successful',
+    'english' => 'English',
+    'vietnam' => 'Vietnam',
 ];

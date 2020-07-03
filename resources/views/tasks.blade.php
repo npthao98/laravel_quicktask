@@ -2,19 +2,24 @@
 
 @section('content')
     <div class="container">
+        @if(Session::has('message'))
+            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
+                {{ Session::get('message') }}
+            </p>
+        @endif
         <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ trans('tasks.create.title') }}
                 </div>
                 <div class="panel-body">
-                @include('common.errors')
                     <form action="{{ route('tasks.store')}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
+                        @include('common.errors')
                         <div class="form-group">
                             <label for="task-name" class="col-sm-3 control-label">{{ trans('tasks.create.name') }}</label>
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="task-name" class="form-control">
+                                <input type="text" name="name" id="task-name" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -38,38 +43,26 @@
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="table-text">
-                                        <div>
-                                            {{ trans('tasks.index.example1') }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <form action="#" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-btn fa-trash"></i>{{ trans('tasks.index.bt_delete') }}
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="table-text">
-                                        <div>
-                                            {{ trans('tasks.index.example2') }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <form action="#" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="fa fa-btn fa-trash"></i>{{ trans('tasks.index.bt_delete') }}
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                @if (isset($tasks) && count($tasks) > 0)
+                                    @foreach ($tasks as $task)
+                                        <tr>
+                                            <td class="table-text">
+                                                <div>
+                                                    {{ $task->name }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fa fa-btn fa-trash"></i>{{ trans('tasks.index.bt_delete') }}
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
